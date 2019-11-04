@@ -8,13 +8,13 @@ export default function Results() {
         <Fragment>
             <div className='popup-container'></div>
             <div className='popup-results'>
-                <CalendarWidget />
                 Results
             <ul>
                     <li>{date && date.getMonth() + "/" + date.getDate()}</li>
-                    <li>{duration && duration}</li>
-                    <li>{special && special}</li>
+                    <li>{duration && "duration: " + duration}</li>
+                    <li>{special && "special: " + special}</li>
                 </ul>
+                <CalendarWidget />
             </div>
         </Fragment>
     )
