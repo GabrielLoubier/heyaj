@@ -1,32 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { TweenMax, Back, Elastic, Bounce, Expo } from 'gsap';
 import Menu from './Menu';
 import Global from './Global'
 import Date from './Date'
-import { TweenMax, Back, Elastic, Bounce, Expo } from 'gsap';
 import Duration from './Duration';
 import Special from './Special';
+import stockPic from './images/stock-pic.jpeg'
+import './App.css';
+import Results from './Results';
 
 function App() {
   const [currentlyViewedItem, setCurrentlyViewedItem] = useState("")
   const [date, setDate] = useState("")
   const [duration, setDuration] = useState("")
   const [special, setSpecial] = useState("")
+  const [search, setSearch] = useState("")
   useEffect(() => {
-    TweenMax.to(".popup-container", .5, { y: -50 })
-    TweenMax.to(".popup-container", .75, { delay: .2, opacity: 1 })
-  })
+    TweenMax.to(".popup-wrapper", .2, { y: -50 })
+    TweenMax.to(".popup-wrapper", .3, { opacity: 1 })
+  }, [currentlyViewedItem])
+
+  function renderPopUp() {
+    switch (currentlyViewedItem) {
+      case ("date"):
+        return <Date />
+      case ("duration"):
+        return <Duration />
+      case ("special"):
+        return <Special />
+    }
+  }
 
   return (
-    <Global.Provider value={[currentlyViewedItem, setCurrentlyViewedItem, date, setDate, duration, setDuration, special, setSpecial]}>
-      <div className="parent-container">
+    <Global.Provider value={[currentlyViewedItem, setCurrentlyViewedItem, date, setDate, duration, setDuration, special, setSpecial, search, setSearch]}>
+      <div className="parent-container" style={{ backgroundImage: `url(${stockPic})`, backgroundSize: 'contain' }}>
         <Menu />
-        {currentlyViewedItem === "date" && <Date />}
-        {currentlyViewedItem === "duration" && <Duration />}
-        {currentlyViewedItem === "special" && <Special />}
-
-
+        {renderPopUp()}
+        {search && <Results />}
       </div>
     </Global.Provider>
   );

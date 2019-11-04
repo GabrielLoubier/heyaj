@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect, Fragment } from 'react'
 import { useSpring, animated } from 'react-spring'
 import Global from './Global'
 import './Duration.css'
@@ -12,7 +12,6 @@ function DurationCard(props) {
         fill: hov ? "#3D1A16" : "#78CAD4",
         color: hov ? "#3D1A16" : "#78CAD4",
     })
-
     function handleClick() {
         setDuration(props.time + " | " + props.cost)
         setClicked(!clicked)
@@ -52,7 +51,7 @@ function DurationCard(props) {
                     </g>
                     <g id="right">
                         <path id="arrow" d="M279 15L285 20L279 25" stroke="#3D1A16" stroke-width="2" />
-                        <animated.text style={hovStyle} id="dynamic-duration-cost" fill="#3D1A16" font-family="Roboto" font-size="14" font-weight="bold" letter-spacing="0em"><tspan x="242.922" y="24.7852">{props.cost}</tspan></animated.text>
+                        <animated.text style={hovStyle} id="dynamic-duration-cost" font-family="Roboto" font-size="14" font-weight="bold" letter-spacing="0em"><tspan x="242.922" y="24.7852">{props.cost}</tspan></animated.text>
                         <text id="money" fill="#3D1A16" font-family="Roboto" font-size="14" font-weight="bold" letter-spacing="0em"><tspan x="209.961" y="24.7852">$</tspan></text>
                     </g>
                 </g>
@@ -63,6 +62,7 @@ function DurationCard(props) {
 
 
 export default function Duration() {
+    const [a, setCurrent] = useContext(Global)
     const myList = [
         {
 
@@ -89,18 +89,7 @@ export default function Duration() {
             time: "50",
             cost: 80,
         },
-        {
-            time: "50",
-            cost: 80,
-        },
-        {
-            time: "50",
-            cost: 80,
-        },
-        {
-            time: "50",
-            cost: 80,
-        },
+
     ]
 
     // useEffect(() => {
@@ -110,8 +99,14 @@ export default function Duration() {
     // }, [duration])
 
     return (
-        <div className='popup-container'>
-            {myList.map((i, key) => <DurationCard id={key} time={i.time} cost={i.cost} />)}
-        </div>
+        <Fragment>
+            <div className='popup-container'
+                onClick={() => setCurrent(null)}
+            >
+                <div className='popup-wrapper'>
+                    {myList.map((i, key) => <DurationCard id={key} time={i.time} cost={i.cost} />)}
+                </div>
+            </div>
+        </Fragment>
     )
 }

@@ -1,10 +1,10 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useSpring, animated } from 'react-spring'
 import './Menu.css'
 import Global from './Global'
 
 function Card(props) {
-    const [current, setCurrent] = useContext(Global)
+    const [current, setCurrent, date, setDate, duration, setDuration, special, setSpecial] = useContext(Global)
     const [hov, setHov] = useState(false)
     const config = {
         friction: 20,
@@ -12,12 +12,20 @@ function Card(props) {
         tension: 400
     }
     const cardStyle = useSpring({
-        color: hov || current === props.name ? "#78CAD4" : "#BDBDBD",
-        fill: hov || current === props.name ? "#78CAD4" : "#BDBDBD",
+        // check if its hovered, has its popup activated, or is not empty
+        color: hov || current === props.name || (props.name === "date" && date) || (props.name === "duration" && duration) || (props.name === "special" && special) ? "#78CAD4" : "#BDBDBD",
+        fill: hov || current === props.name || (props.name === "date" && date) || (props.name === "duration" && duration) || (props.name === "special" && special) ? "#78CAD4" : "#BDBDBD",
         transform: hov ? 'translateY(-2px)' : 'translateY(0px)',
         boxShadow: hov ? "0px 3px 6px rgba(189, 189, 189, 0.75)" : "0px 2px 4px rgba(189, 189, 189, 0.5)",
         config: config
     })
+    function checkImg() {
+        if (props.name === "date")
+            return calendarSVG
+        else if (props.name === "duration")
+            return timerSVG
+        else return specialSVG
+    }
     const calendarSVG = <animated.svg style={{ ...cardStyle, boxShadow: "0px" }} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M16.75 3.66667C16.229 3.38733 12.9893 1.64333 11.209 0.526333C10.905 0.204 10.477 0 10 0C9.523 0 9.095 0.204 8.791 0.526333C7.01033 1.643 3.771 3.38733 3.25 3.66667H0V20H20V3.66667H16.75ZM10.741 1.00133C10.7423 1.003 10.7427 1.005 10.7443 1.00667C10.8253 1.09767 10.9147 1.23533 10.9633 1.412C10.9673 1.427 10.974 1.441 10.9773 1.45667C10.9913 1.52133 11 1.59133 11 1.66667C11 2.218 10.5513 2.66667 10 2.66667C9.44867 2.66667 9 2.218 9 1.66667C9 1.59133 9.00867 1.52133 9.023 1.45667C9.02633 1.44133 9.03267 1.42767 9.03667 1.41267C9.08533 1.23533 9.17467 1.098 9.25567 1.00667C9.257 1.005 9.25733 1.003 9.259 1.00133C9.44233 0.797667 9.705 0.666667 10 0.666667C10.295 0.666667 10.5577 0.797667 10.741 1.00133ZM8.33533 1.58467C8.334 1.612 8.33333 1.63933 8.33333 1.66667C8.33333 2.58567 9.081 3.33333 10 3.33333C10.919 3.33333 11.6667 2.58567 11.6667 1.66667C11.6667 1.63933 11.666 1.612 11.6647 1.58467C12.8623 2.29667 14.343 3.117 15.3503 3.66667H4.64967C5.657 3.117 7.13767 2.29667 8.33533 1.58467ZM3.33333 4.33333H16.6667H19.3333V6H0.666667V4.33333H3.33333ZM0.666667 19.3333V6.66667H19.3333V19.3333H0.666667Z" />
         <path d="M7.66683 9.66667C7.85092 9.66667 8.00016 9.51743 8.00016 9.33333C8.00016 9.14924 7.85092 9 7.66683 9C7.48273 9 7.3335 9.14924 7.3335 9.33333C7.3335 9.51743 7.48273 9.66667 7.66683 9.66667Z" />
@@ -61,13 +69,6 @@ function Card(props) {
         <path d="M9.32316 10.2666H7.1416C6.61566 10.2666 6.56348 11.2863 6.56348 11.2966C6.56348 11.3063 6.62473 12.2582 7.15566 12.2582H9.33754C9.85441 12.2582 9.91566 11.3063 9.91566 11.2966C9.91566 11.2863 9.86347 10.2666 9.32316 10.2666ZM9.2091 11.6332H7.26973C7.2291 11.5307 7.18941 11.3604 7.18816 11.2969C7.1891 11.221 7.23441 11.0122 7.2791 10.8916H9.19972C9.24472 11.0122 9.28972 11.221 9.29066 11.2963C9.28972 11.3604 9.24973 11.531 9.2091 11.6332Z" />
         <path d="M9.38885 12.8256C8.65885 12.6685 7.81979 12.6678 7.08947 12.8256C6.05416 13.0497 5.43604 13.5375 5.43604 14.13C5.43604 14.3028 5.57604 14.4425 5.74854 14.4425H10.7298C10.9023 14.4425 11.0423 14.3028 11.0423 14.13C11.0423 13.5372 10.4242 13.0497 9.38885 12.8256ZM6.28166 13.8175C6.47479 13.6722 6.79166 13.5297 7.22135 13.4366C7.86541 13.2975 8.61385 13.2975 9.25666 13.4366C9.68666 13.5297 10.0035 13.6722 10.1967 13.8175H6.28166Z" />
     </animated.svg>
-    function checkImg() {
-        if (props.name === "date")
-            return calendarSVG
-        else if (props.name === "duration")
-            return timerSVG
-        else return specialSVG
-    }
 
     return (
         <animated.div style={cardStyle} className='card-target'
@@ -80,11 +81,32 @@ function Card(props) {
     )
 }
 
+
+
 export default function Menu() {
-    const [current, setCurrent, date, setDate, duration, setDuration, special] = useContext(Global)
+    const [current, setCurrent, date, setDate, duration, setDuration, special, setSpecial, search, setSearch] = useContext(Global)
     const containerStyle = useSpring({
-        transform: current ? "translateY(-300px)" : 'translateY(0px)'
+        // makes the MENU ANIMATE UP AND DOWN
+        transform: search ? "translateY(-300px)" : 'translateY(0px)'
     })
+    function SearchButton() {
+        const [hov, setHov] = useState(false)
+        const config = {
+            friction: 20,
+            mass: .5,
+            tension: 400
+        }
+        const specialCardStyle = useSpring({
+            transform: hov ? 'translateY(-2px)' : 'translateY(0px)',
+            boxShadow: hov ? "0px 3px 6px rgba(189, 189, 189, 0.75)" : "0px 2px 4px rgba(189, 189, 189, 0.5)",
+            config: config
+        })
+        return <animated.div style={specialCardStyle} className='search-button'
+            onClick={() => setSearch(true)}
+            onMouseOver={() => setHov(true)}
+            onMouseLeave={() => setHov(false)}
+        ><p>Search</p></animated.div>
+    }
     return (
         <animated.div style={containerStyle} className='menu-container'
         >
@@ -95,10 +117,10 @@ export default function Menu() {
             </div>
             <div className='card-container'>
                 <Card text={date ? [date.getMonth() + "/" + date.getDate()] : "Select Date"} name={"date"} />
-                <Card text={duration ? duration : "$60 min - $71.40"} name={"duration"} />
-                <Card text={special ? special : "select speciality"} name={"special"} />
+                <Card text={duration ? duration : "Select Duration"} name={"duration"} />
+                <Card text={special ? special : "Select Speciality"} name={"special"} />
             </div>
-            <div className='search-button' onClick={() => setCurrent(null)}><p>Search</p></div>
+            <SearchButton />
         </animated.div>
 
 

@@ -6,8 +6,8 @@ import { TweenMax } from 'gsap';
 
 function SpecialCard(props) {
     const [a, setCurrent, c, e, d, f, special, setSpecial] = useContext(Global)
-    const [hov, setHov] = useState(false)
     const [clicked, setClicked] = useState(false)
+    const [hov, setHov] = useState(false)
     const config = {
         friction: 20,
         mass: .5,
@@ -22,26 +22,28 @@ function SpecialCard(props) {
         <path d="M1 1L7 6L1 11" stroke="#78CAD4" stroke-width="2" />
     </svg>
 
-    useEffect(() => {
-        clicked ?
-            TweenMax.staggerTo("#spec", .22, {
-                y: 5,
-                opacity: 0,
-                stagger: {
-                    amount: .5,
-                    from: props.id,
-                },
-                onComplete: (() => setCurrent(null))
-            })
-            : TweenMax.staggerTo("#spec", .2, {
-                x: 0,
-                opacity: 1,
-                stagger: {
-                    amount: .2,
-                    from: props.id,
-                },
-            })
-    }, [clicked])
+
+    // STAGGER OUT ANIMATION
+    // useEffect(() => {
+    //     clicked ?
+    //         TweenMax.staggerTo("#spec", .22, {
+    //             y: 5,
+    //             opacity: 0,
+    //             stagger: {
+    //                 amount: .5,
+    //                 from: props.id,
+    //             },
+    //             onComplete: (() => setCurrent(null))
+    //         })
+    //         : TweenMax.staggerTo("#spec", .2, {
+    //             x: 0,
+    //             opacity: 1,
+    //             stagger: {
+    //                 amount: .2,
+    //                 from: props.id,
+    //             },
+    //         })
+    // }, [clicked])
     return (
         <animated.div style={specialCardStyle} className='special-card' id='spec'
             onMouseOver={() => setHov(true)}
@@ -53,13 +55,16 @@ function SpecialCard(props) {
 
 
 export default function Special() {
+    const [a, setCurrent] = useContext(Global)
     const mylist = ['tissue', 'massage', 'feet',]
-
     return (
-        <div className='popup-container'>
-            {mylist.map((i, key) =>
-                <SpecialCard name={i} id={key} />
-            )}
+        <div className='popup-container'
+            onClick={() => setCurrent(null)}>
+            <div className='popup-wrapper'>
+                {mylist.map((i, key) =>
+                    <SpecialCard name={i} id={key} />
+                )}
+            </div>
         </div>
     )
 }
