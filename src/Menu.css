@@ -1,0 +1,142 @@
+.menu-container{
+    position: relative;
+    margin: auto;
+    width: 1000px;
+    height: 120px;
+    left: 0px;
+    top: 400px;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+.card-container{
+    position: relative;
+    width: 809px;
+    height: 60px;
+    left: 0px;
+    top: 0px;
+}
+
+.card-names-container{
+    position: relative;
+    width: 809px;
+    height: 60px;
+    left: 0px;
+    top: 25px;
+    margin: 0px;
+}
+.card-name{
+    position: relative;
+    display: inline-flex;
+    text-align: center;
+    width: 213px;
+    height: 25px;
+    margin: 0px 15px 0px 35px;
+    font-family: Roboto;
+    font-size: 18px;
+    color:  #3D1A16;
+}
+.card-target{
+    position: relative;
+    display: inline-flex;
+    margin: 0px 25px;
+    width: 213px;
+    height: 30px;
+    left:0px;
+    background: transparent;
+
+}
+.card-text{
+width: 170px;
+height: 30px;
+padding-left: 10px;
+font-family: Roboto;
+font-style: normal;
+font-weight: bold;
+font-size: 14px;
+line-height: 16px;
+display: flex;
+align-items: center;
+/* Gray 4 */
+
+}
+.img-wrapper{
+    /* width:43px;
+    height:30px; */
+    position: relative;
+    display: inline;
+    align-items: center;
+    top: 5px;
+}
+
+.search-button{
+    position: absolute;
+    display: inline-flex;
+    width: 150px;
+    height: 40px;
+    left: 809px;
+    top: 40px;
+    background: #78CAD4;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    border: 0px solid black;
+    text-align: center;
+    align-items: center;
+}
+.search-button p{
+    color: white;
+    margin: auto;
+}
+
+.popup-container{
+    position: relative;
+    width: 400px;
+    min-height: 350px;
+   
+    margin: auto;
+    top: 200px;
+    padding: 25px;
+    background: white;
+    border-radius: 10px;
+    border: 0px solid white;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+    opacity:0;
+    text-align: center;
+    align-items: center;
+    overflow: scroll;
+}
+
+.react-calendar{
+    margin: auto;
+    position: relative;
+    padding: 10px;
+    top:25px;
+    width: 350px;
+    max-width: 100%;
+    background: white;
+    border: 0px solid white!important;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.125em;
+    
+}
+abbr[title] {
+    text-decoration: none;
+}
+.react-calendar__tile{
+    color: #AFDFE5;
+}
+.react-calendar__tile--active{
+    background:#78CAD4!important;
+    border-radius: 2px;
+    color: white;
+}
+.react-calendar__month-view__days__day--neighboringMonth{
+    color: #CCCCCC!important;
+}
+
+.react-calendar__month-view__days__day--weekend{
+    color:#AFDFE5!important;
+}
+.react-calendar__month-view__days__day--weekend--active{
+    color:white!important;
+}

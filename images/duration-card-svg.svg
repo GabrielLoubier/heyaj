@@ -1,0 +1,17 @@
+<svg width="300" height="40" viewBox="0 0 300 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="duration-card-svg">
+<rect id="bg-group" width="300" height="40" rx="5" fill="white"/>
+<g id="left">
+<g id="Group 13">
+<rect id="Rectangle 22" x="15.5" y="5.5" width="39" height="29" rx="4.5" stroke="#CCCCCC"/>
+<text id="delete" fill="#78CAD4" font-family="Roboto" font-size="14" font-weight="bold" letter-spacing="0em"><tspan x="26.9609" y="24.7852">30</tspan></text>
+</g>
+<text id="minutes" fill="#3D1A16" font-family="Roboto" font-size="14" font-weight="300" letter-spacing="0em"><tspan x="65.1104" y="24.7852">minutes</tspan></text>
+</g>
+<g id="right">
+<path id="arrow" d="M279 15L285 20L279 25" stroke="#78CAD4" stroke-width="2"/>
+<text id="50" fill="#3D1A16" font-family="Roboto" font-size="14" font-weight="bold" letter-spacing="0em"><tspan x="242.922" y="24.7852">50</tspan></text>
+<text id="$" fill="#3D1A16" font-family="Roboto" font-size="14" font-weight="bold" letter-spacing="0em"><tspan x="209.961" y="24.7852">$</tspan></text>
+</g>
+</g>
+</svg>
