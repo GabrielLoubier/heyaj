@@ -21,15 +21,15 @@ function App() {
   }, [currentlyViewedItem])
 
   function renderPopUp() {
-    switch (currentlyViewedItem) {
-      case ("date"):
-        return <Date />
-      case ("duration"):
-        return <Duration />
-      case ("special"):
-        return <Special />
-    }
+    if (currentlyViewedItem === "date")
+      return <Date />
+    else if (currentlyViewedItem === "duration")
+      return <Duration />
+    else if (currentlyViewedItem === "special")
+      return <Special />
+    else return null
   }
+
 
   return (
     <Global.Provider value={[currentlyViewedItem, setCurrentlyViewedItem, date, setDate, duration, setDuration, special, setSpecial, search, setSearch]}>

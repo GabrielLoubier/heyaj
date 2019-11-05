@@ -6,13 +6,12 @@ import Global from './Global'
 function Card(props) {
     const [current, setCurrent, date, setDate, duration, setDuration, special, setSpecial] = useContext(Global)
     const [hov, setHov] = useState(false)
-    const config = {
+    const config = { // spring settings
         friction: 20,
         mass: .5,
         tension: 400
     }
-    const cardStyle = useSpring({
-        // check if its hovered, has its popup activated, or is not empty
+    const cardStyle = useSpring({ // check if its hovered, has its popup activated, or is not empty
         color: hov || current === props.name || (props.name === "date" && date) || (props.name === "duration" && duration) || (props.name === "special" && special) ? "#78CAD4" : "#BDBDBD",
         fill: hov || current === props.name || (props.name === "date" && date) || (props.name === "duration" && duration) || (props.name === "special" && special) ? "#78CAD4" : "#BDBDBD",
         transform: hov ? 'translateY(-2px)' : 'translateY(0px)',
@@ -87,7 +86,7 @@ export default function Menu() {
     const [current, setCurrent, date, setDate, duration, setDuration, special, setSpecial, search, setSearch] = useContext(Global)
     const containerStyle = useSpring({
         // makes the MENU ANIMATE UP AND DOWN
-        transform: search ? "translateY(-300px)" : 'translateY(0px)'
+        transform: search ? "translateY(-400px)" : 'translateY(0px)'
     })
     function SearchButton() {
         const [hov, setHov] = useState(false)

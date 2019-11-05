@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect, Fragment } from 'react'
 import Global from './Global'
 import "./Special.css"
 import { useSpring, animated } from 'react-spring';
@@ -22,49 +22,67 @@ function SpecialCard(props) {
         <path d="M1 1L7 6L1 11" stroke="#78CAD4" stroke-width="2" />
     </svg>
 
-
     // STAGGER OUT ANIMATION
-    // useEffect(() => {
-    //     clicked ?
-    //         TweenMax.staggerTo("#spec", .22, {
-    //             y: 5,
-    //             opacity: 0,
-    //             stagger: {
-    //                 amount: .5,
-    //                 from: props.id,
-    //             },
-    //             onComplete: (() => setCurrent(null))
-    //         })
-    //         : TweenMax.staggerTo("#spec", .2, {
-    //             x: 0,
-    //             opacity: 1,
-    //             stagger: {
-    //                 amount: .2,
-    //                 from: props.id,
-    //             },
-    //         })
-    // }, [clicked])
+    useEffect(() => {
+        clicked ?
+            TweenMax.staggerTo(".special-card-container", .22, {
+                x: 50,
+                opacity: 0,
+                stagger: {
+                    amount: .1,
+                    from: props.id,
+                },
+                onComplete: (() => setCurrent(null))
+            })
+            : TweenMax.staggerTo(".special-card-container", .2, {
+                x: 0,
+                opacity: 1,
+                stagger: {
+                    amount: .2,
+                    from: props.id,
+                },
+            })
+    }, [clicked])
     return (
-        <animated.div style={specialCardStyle} className='special-card' id='spec'
+        <div className='special-card-container'
             onMouseOver={() => setHov(true)}
             onMouseLeave={() => setHov(false)}
-            onClick={() => (setSpecial(props.name), setClicked(true))}>{props.name}<span className='special-arrow'>{specialArrow}</span>
-        </animated.div>
+            onClick={() => (setClicked(true), setSpecial(props.name))}
+        >
+            <animated.div style={specialCardStyle} className='special-card' id='spec'
+            >{props.name}<span className='special-arrow'>{specialArrow}</span>
+            </animated.div>
+        </div>
     )
 }
 
 
 export default function Special() {
     const [a, setCurrent] = useContext(Global)
-    const mylist = ['tissue', 'massage', 'feet',]
+    const myList = [
+        {
+            time: "Head",
+            cost: 60,
+        },
+        {
+            time: "Feeasdadt",
+            cost: 70,
+        },
+
+    ]
     return (
-        <div className='popup-container'
-            onClick={() => setCurrent(null)}>
-            <div className='popup-wrapper'>
-                {mylist.map((i, key) =>
-                    <SpecialCard name={i} id={key} />
-                )}
+        <Fragment>
+            <div className='popup-container'
+                onClick={() => setCurrent(null)}
+            >
             </div>
-        </div>
+            <div className='popup-wrapper'>
+                {myList.map((i, key) =>
+                    <SpecialCard id={key} name={i.time} />
+                )}
+
+            </div>
+        </Fragment>
+
     )
 }

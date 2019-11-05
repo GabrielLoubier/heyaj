@@ -102,11 +102,11 @@ export default function Duration() {
         <Fragment>
             <div className='popup-container'
                 onClick={() => setCurrent(null)}
-            >
-                <div className='popup-wrapper'>
-                    {myList.map((i, key) => <DurationCard id={key} time={i.time} cost={i.cost} />)}
-                </div>
+            > </div>
+            <div className='popup-wrapper'>
+                {myList.map((i, key) => <DurationCard id={key} time={i.time} cost={i.cost} />)}
             </div>
+
         </Fragment>
     )
 }

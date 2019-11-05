@@ -1,6 +1,5 @@
 .special-card{
-    position: relative;
-    display: inline-flex;
+    position: absolute;
     height: 30px;
     line-height: 30px;
     text-align: left;
@@ -8,7 +7,6 @@
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     padding: 5px 30px 5px 10px;
-    margin: 10px;
     fill:#3D1A16;
     font-family:Roboto;
     font-size:14px;
@@ -18,4 +16,12 @@
 .special-arrow{
     position: absolute;
     right: 10px
+}
+
+.special-card-container{
+    position:relative;
+    height:30px;
+    min-width: 70px;
+    margin: 10px;
+    display: inline-flex;
 }

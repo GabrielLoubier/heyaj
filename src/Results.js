@@ -6,7 +6,7 @@ export default function Results() {
     const [currentlyViewedItem, setCurrentlyViewedItem, date, setDate, duration, setDuration, special, setSpecial, search, setSearch] = useContext(Global)
     return (
         <Fragment>
-            <div className='popup-container'></div>
+            {/* <div className='popup-container'></div> */}
             <div className='popup-results'>
                 Results
             <ul>

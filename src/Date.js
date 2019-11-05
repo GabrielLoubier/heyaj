@@ -12,10 +12,10 @@ export default class MyApp extends Component {
         return (
             <Global.Consumer>
                 {props => {
-                    return <Fragment><div className='popup-container'
-                        onClick={() => props[1](null)}
-                    >
-                    </div>
+                    return <Fragment>
+                        <div className='popup-container'
+                            onClick={() => props[1](null)}>
+                        </div>
                         <div className='popup-wrapper'>
                             <Calendar
                                 onChange={(i) => props[3](i)}
@@ -34,7 +34,6 @@ export default class MyApp extends Component {
                             } onClick={() => props[1](null)}>Close</button>
                         </div>
                     </Fragment>
-
                 }}
             </Global.Consumer>
         );
