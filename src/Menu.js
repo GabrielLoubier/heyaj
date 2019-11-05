@@ -3,8 +3,8 @@ import { useSpring, animated } from 'react-spring'
 import './Menu.css'
 import Global from './Global'
 
-function Card(props) {
-    const [current, setCurrent, date, setDate, duration, setDuration, special, setSpecial] = useContext(Global)
+function Card(props) { // CHILD
+    const [current, setCurrent, date, setDate, duration, setDuration, special, setSpecial, search, setSearch] = useContext(Global)
     const [hov, setHov] = useState(false)
     const config = { // spring settings
         friction: 20,
@@ -71,7 +71,7 @@ function Card(props) {
 
     return (
         <animated.div style={cardStyle} className='card-target'
-            onClick={() => (setCurrent(props.name))}
+            onClick={() => (setCurrent(props.name), setSearch(false))}
             onMouseOver={() => setHov(true)}
             onMouseLeave={() => setHov(!hov)}>
             <div className='card-text'> {props.text}</div>
@@ -82,13 +82,12 @@ function Card(props) {
 
 
 
-export default function Menu() {
+export default function Menu() { // PARENT
     const [current, setCurrent, date, setDate, duration, setDuration, special, setSpecial, search, setSearch] = useContext(Global)
-    const containerStyle = useSpring({
-        // makes the MENU ANIMATE UP AND DOWN
+    const containerStyle = useSpring({ // menu elevator
         transform: search ? "translateY(-400px)" : 'translateY(0px)'
     })
-    function SearchButton() {
+    function SearchButton() { // CHILD
         const [hov, setHov] = useState(false)
         const config = {
             friction: 20,
