@@ -15,7 +15,8 @@ function App() {
   const [duration, setDuration] = useState("")
   const [special, setSpecial] = useState("")
   const [search, setSearch] = useState("")
-  useEffect(() => {
+
+  useEffect(() => {  // modal popup fade in
     TweenMax.to(".popup-wrapper", .2, { y: -50 })
     TweenMax.to(".popup-wrapper", .3, { opacity: 1 })
   }, [currentlyViewedItem])
@@ -30,10 +31,9 @@ function App() {
     else return null
   }
 
-
   return (
     <Global.Provider value={[currentlyViewedItem, setCurrentlyViewedItem, date, setDate, duration, setDuration, special, setSpecial, search, setSearch]}>
-      <div className="parent-container" style={{ backgroundImage: `url(${stockPic})`, backgroundSize: 'contain' }}>
+      <div className="parent-container" style={{ backgroundImage: `url(${stockPic})`, backgroundSize: 'cover' }}>
         <Menu />
         {renderPopUp()}
         {search && <Results />}
