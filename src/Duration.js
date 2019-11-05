@@ -13,7 +13,7 @@ function DurationCard(props) {
         color: hov ? "#3D1A16" : "#78CAD4",
     })
     function handleClick() {
-        setDuration(props.time + " | " + props.cost)
+        setDuration(props.time + " minutes" + " | $" + props.cost)
         setClicked(!clicked)
     }
     useEffect(() => {
@@ -95,7 +95,6 @@ export default function Duration() {
     // useEffect(() => {
     //     duration ? TweenMax.staggerTo(".duration-card-container", 1, { opacity: 1 }, .2)
     //         : TweenMax.staggerTo(".duration-card-container", 1, { opacity: 0 }, .2)
-
     // }, [duration])
 
     return (

@@ -85,8 +85,11 @@ function Card(props) { // CHILD
 export default function Menu() { // PARENT
     const [current, setCurrent, date, setDate, duration, setDuration, special, setSpecial, search, setSearch] = useContext(Global)
     const containerStyle = useSpring({ // menu elevator
-        transform: search ? "translateY(-400px)" : 'translateY(0px)'
+        // transform: search ? "translateY(-300px)" : 'translateY(0px)', 
+        top: search ? "0%" : "50%",
+        marginTop: search ? "0px" : "-60px",
     })
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     function SearchButton() { // CHILD
         const [hov, setHov] = useState(false)
         const config = {
@@ -94,27 +97,26 @@ export default function Menu() { // PARENT
             mass: .5,
             tension: 400
         }
-        const specialCardStyle = useSpring({
+        const searchStyle = useSpring({
             transform: hov ? 'translateY(-2px)' : 'translateY(0px)',
             boxShadow: hov ? "0px 3px 6px rgba(189, 189, 189, 0.75)" : "0px 2px 4px rgba(189, 189, 189, 0.5)",
             config: config
         })
-        return <animated.div style={specialCardStyle} className='search-button'
+        return <animated.div style={searchStyle} className='search-button'
             onClick={() => setSearch(true)}
             onMouseOver={() => setHov(true)}
             onMouseLeave={() => setHov(false)}
         ><p>Search</p></animated.div>
     }
     return (
-        <animated.div style={containerStyle} className='menu-container'
-        >
+        <animated.div style={containerStyle} className='menu-container'>
             <div className='card-names-container'>
                 <div className='card-name'>Date</div>
                 <div className='card-name'>Duration</div>
                 <div className='card-name'>Specialities</div>
             </div>
             <div className='card-container'>
-                <Card text={date ? [date.getMonth() + "/" + date.getDate()] : "Select Date"} name={"date"} />
+                <Card text={date ? [months[date.getMonth()] + " " + date.getDate() + ", " + (date.getYear() + 1900)] : "Select Date"} name={"date"} />
                 <Card text={duration ? duration : "Select Duration"} name={"duration"} />
                 <Card text={special ? special : "Select Speciality"} name={"special"} />
             </div>

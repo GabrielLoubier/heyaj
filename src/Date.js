@@ -7,6 +7,13 @@ export default class MyApp extends Component {
     state = {
         date: new Date(),
     }
+    static contextType = Global
+
+    componentDidMount() {
+        const user = this.context
+
+        console.log(user) // { name: 'Tania', loggedIn: true }
+    }
     onChange = date => this.setState({ date })
     render() {
         return (
@@ -18,7 +25,7 @@ export default class MyApp extends Component {
                         </div>
                         <div className='popup-wrapper'>
                             <Calendar
-                                onChange={(i) => props[3](i)}
+                                onChange={(i) => (props[3](i), props[1](null))}
                                 value={this.state.date} />
                             <button style={{
                                 width: "75px",
