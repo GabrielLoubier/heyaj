@@ -15,6 +15,21 @@ function App() {
   const [duration, setDuration] = useState("")
   const [special, setSpecial] = useState("")
   const [search, setSearch] = useState("")
+  const [windowSize, setWindow] = useState("")
+  function updateWindowDimensions() {
+    setWindow(window.innerWidth)
+    console.log('window')
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', updateWindowDimensions);
+    return function cleanup() {
+      window.removeEventListener('resize', updateWindowDimensions);
+    };
+  }, []);
+  useEffect(() => {
+    date && duration && special && setSearch(true)
+  }, [date, duration, special, setSearch])
 
   useEffect(() => {  // modal popup fade in
     TweenMax.to(".popup-wrapper", .2, { y: -50 })
@@ -31,14 +46,20 @@ function App() {
     else return null
   }
 
+
+
+
+
   return (
-    <Global.Provider value={[currentlyViewedItem, setCurrentlyViewedItem, date, setDate, duration, setDuration, special, setSpecial, search, setSearch]}>
+
+    <Global.Provider value={[currentlyViewedItem, setCurrentlyViewedItem, date, setDate, duration, setDuration, special, setSpecial, search, setSearch, windowSize]}>
       <div className="parent-container" style={{ backgroundImage: `url(${stockPic})`, backgroundSize: 'cover' }}>
         <Menu />
         {renderPopUp()}
         {search && <Results />}
       </div>
     </Global.Provider>
+
   );
 }
 

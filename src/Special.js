@@ -68,6 +68,22 @@ export default function Special() {
             time: "Feeasdadt",
             cost: 70,
         },
+        {
+            time: "Head",
+            cost: 60,
+        },
+        {
+            time: "Feeasdadt",
+            cost: 70,
+        },
+        {
+            time: "Head",
+            cost: 60,
+        },
+        {
+            time: "Feeasdadt",
+            cost: 70,
+        },
 
     ]
     return (
@@ -78,10 +94,11 @@ export default function Special() {
             </div>
             <div className='popup-wrapper'>
                 {myList.map((i, key) =>
-                    <SpecialCard id={key} name={i.time} />
-                )}
+                    <SpecialCard id={key} name={i.time} />)}
+                <button style={{ position: 'relative', display: 'block', top: '30px', zIndex: 99999, margin: 'auto', }} className="close-button" onClick={() => setCurrent(null)}>Close</button>
 
             </div>
+
         </Fragment>
 
     )

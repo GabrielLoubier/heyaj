@@ -12,6 +12,7 @@
     font-size:14px;
     font-weight: 300;
     letter-spacing: 0em;
+    margin: 0px 10px;
 }
 .special-arrow{
     position: absolute;
@@ -22,6 +23,7 @@
     position:relative;
     height:30px;
     min-width: 70px;
-    margin: 10px;
+    margin: 15px;
     display: inline-flex;
+    justify-content: space-evenly;
 }

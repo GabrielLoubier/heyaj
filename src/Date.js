@@ -27,18 +27,7 @@ export default class MyApp extends Component {
                             <Calendar
                                 onChange={(i) => (props[3](i), props[1](null))}
                                 value={this.state.date} />
-                            <button style={{
-                                width: "75px",
-                                height: "20px",
-                                background: "#78CAD4",
-                                position: 'relative',
-                                marginTop: "30px",
-                                boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.25)",
-                                borderRadius: "2px",
-                                color: "white",
-                                border: "0px"
-                            }
-                            } onClick={() => props[1](null)}>Close</button>
+                            <button className="close-button" onClick={() => props[1](null)}>Close</button>
                         </div>
                     </Fragment>
                 }}

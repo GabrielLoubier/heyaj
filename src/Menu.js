@@ -3,11 +3,13 @@ import { useSpring, animated } from 'react-spring'
 import './Menu.css'
 import Global from './Global'
 import MobileCardTarget from './MobileCardTarget'
+import Results from './Results';
+
 
 function Card(props) { // CHILD
-    const [current, setCurrent, date, setDate, duration, setDuration, special, setSpecial, search, setSearch] = useContext(Global)
+    const [current, setCurrent, date, setDate, duration, setDuration, special, setSpecial, search, setSearch, windowSize] = useContext(Global)
     const [hov, setHov] = useState(false)
-    const mobile = window.innerWidth < 601
+    const mobile = windowSize < 601
     const config = { // spring settings
         friction: 20,
         mass: .5,
@@ -87,13 +89,14 @@ function Card(props) { // CHILD
 
 
 export default function Menu() { // PARENT
-    const [current, setCurrent, date, setDate, duration, setDuration, special, setSpecial, search, setSearch] = useContext(Global)
+    const [current, setCurrent, date, setDate, duration, setDuration, special, setSpecial, search, setSearch, windowSize] = useContext(Global)
     const containerStyle = useSpring({ // menu elevator - currently using margin to move up/down. Could switch to transform when you know dimensions.
         // transform: search ? "translateY(-300px)" : 'translateY(0px)',
         top: search ? "0%" : "50%",
-        marginTop: search ? "0px" : window.innerWidth < 601 ? "-175px" : "-60px",
+        marginTop: search ? "0px" : windowSize < 601 ? "-175px" : "-60px",
     })
     const mobile = window.innerWidth < 601
+    console.log(mobile + "mobile")
     var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     function SearchButton(props) { // CHILD
         const [hov, setHov] = useState(false)
@@ -117,17 +120,6 @@ export default function Menu() { // PARENT
 
     return (
         <Fragment>
-            {/* {mobile && search // when the menu changes to search mode render new 'copy component' 
-                ?
-                <animated.div style={containerStyle} className='mo-menu-container'>
-                    <div className='mo-card-container'>
-                        <MobileCardTarget text={date ? [months[date.getMonth()] + " " + date.getDate() + ", " + (date.getYear() + 1900)] : "Select Date"} name={"date"} /> ,
-                        <MobileCardTarget text={duration ? duration : "Select Duration"} name={"duration"} /> ,
-                        <MobileCardTarget text={special ? special : "Select Speciality"} name={"special"} />
-                    </div>
-                    <SearchButton mo={true} />
-                </animated.div>
-                : */}
             <animated.div style={containerStyle} className={mobile && search ? 'mo-menu-container' : 'menu-container'}>
                 {window.innerWidth > 1000 && <div className='card-names-container'>
                     <div className='card-name'>Date</div>
@@ -140,6 +132,8 @@ export default function Menu() { // PARENT
                     <Card mo={mobile & search ? true : false} text={special ? special : "Select Speciality"} name={"special"} />
                 </div>
                 <SearchButton mo={mobile && search ? true : false} />
+                {/* {search && <Results />} */}
+
             </animated.div>
 
 

@@ -65,7 +65,6 @@ export default function Duration() {
     const [a, setCurrent] = useContext(Global)
     const myList = [
         {
-
             time: "30",
             cost: 60,
         },
@@ -92,20 +91,16 @@ export default function Duration() {
 
     ]
 
-    // useEffect(() => {
-    //     duration ? TweenMax.staggerTo(".duration-card-container", 1, { opacity: 1 }, .2)
-    //         : TweenMax.staggerTo(".duration-card-container", 1, { opacity: 0 }, .2)
-    // }, [duration])
-
     return (
         <Fragment>
             <div className='popup-container'
                 onClick={() => setCurrent(null)}
-            > </div>
+            ></div>
             <div className='popup-wrapper'>
                 {myList.map((i, key) => <DurationCard id={key} time={i.time} cost={i.cost} />)}
-            </div>
+                <button className="close-button" onClick={() => setCurrent(null)}>Close</button>
 
+            </div>
         </Fragment>
     )
 }
