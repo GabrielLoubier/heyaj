@@ -16,9 +16,9 @@ function App() {
   const [special, setSpecial] = useState("")
   const [search, setSearch] = useState("")
   const [windowSize, setWindow] = useState("")
+
   function updateWindowDimensions() {
     setWindow(window.innerWidth)
-    console.log('window')
   }
 
   useEffect(() => {
@@ -27,8 +27,10 @@ function App() {
       window.removeEventListener('resize', updateWindowDimensions);
     };
   }, []);
-  useEffect(() => {
-    date && duration && special && setSearch(true)
+
+  useEffect(() => { // show results page if three choices are selected
+    const timer = setTimeout(() => { date && duration && special && setSearch(true) }, 700)
+    return () => clearTimeout(timer)
   }, [date, duration, special, setSearch])
 
   useEffect(() => {  // modal popup fade in
@@ -46,12 +48,7 @@ function App() {
     else return null
   }
 
-
-
-
-
   return (
-
     <Global.Provider value={[currentlyViewedItem, setCurrentlyViewedItem, date, setDate, duration, setDuration, special, setSpecial, search, setSearch, windowSize]}>
       <div className="parent-container" style={{ backgroundImage: `url(${stockPic})`, backgroundSize: 'cover' }}>
         <Menu />
@@ -59,8 +56,6 @@ function App() {
         {search && <Results />}
       </div>
     </Global.Provider>
-
   );
 }
-
 export default App;

@@ -96,7 +96,7 @@ export default function Menu() { // PARENT
         marginTop: search ? "0px" : windowSize < 601 ? "-175px" : "-60px",
     })
     const mobile = window.innerWidth < 601
-    console.log(mobile + "mobile")
+
     var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     function SearchButton(props) { // CHILD
         const [hov, setHov] = useState(false)

@@ -3,6 +3,8 @@ import { useSpring, animated } from 'react-spring'
 import './Menu.css'
 import Global from './Global'
 
+// Copy of Card component just change className
+
 export default function MobileCardTarget(props) { // CHILD
     const [current, setCurrent, date, setDate, duration, setDuration, special, setSpecial, search, setSearch] = useContext(Global)
     const [hov, setHov] = useState(false)
