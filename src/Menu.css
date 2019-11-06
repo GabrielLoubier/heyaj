@@ -4,8 +4,7 @@
     width: 1000px;
     height: 120px;
     left: 0px;
-    top: 50%;
-    margin-top:-60px;
+    top: 400px;
     background: #FFFFFF;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
@@ -36,38 +35,6 @@
     font-family: Roboto;
     font-size: 18px;
     color:  #3D1A16;
-}
-.card-target{
-    position: relative;
-    display: inline-flex;
-    margin: 0px 25px;
-    width: 213px;
-    height: 30px;
-    left:0px;
-    background: transparent;
-
-}
-.card-text{
-width: 170px;
-height: 30px;
-padding-left: 10px;
-font-family: Roboto;
-font-style: normal;
-font-weight: bold;
-font-size: 14px;
-line-height: 16px;
-display: flex;
-align-items: center;
-/* Gray 4 */
-
-}
-.img-wrapper{
-    /* width:43px;
-    height:30px; */
-    position: relative;
-    display: inline;
-    align-items: center;
-    top: 5px;
 }
 
 .search-button{
@@ -122,4 +89,220 @@ abbr[title] {
 }
 .react-calendar__month-view__days__day--weekend--active{
     color:white!important;
+}
+
+.card-target{
+    position: relative;
+    display: inline-flex;
+    margin: 0px 25px;
+    width: 213px;
+    height: 30px;
+    left:0px;
+    border-radius: 5px;
+    background: transparent;
+}
+.card-text{
+    width: 170px;
+    height: 30px;
+    padding-left: 10px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center
+}
+.img-wrapper{
+    /* width:43px;
+    height:30px; */
+    position: relative;
+    display: inline;
+    align-items: center;
+    top: 5px;
+}
+
+@media only screen and (max-width: 1000px) and (min-width: 600px){
+    .menu-container{
+        position: relative;
+        margin: auto;
+        width: 600px;
+        height: 120px;
+        background: #FFFFFF;
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+    }
+    .card-container{
+        position: absolute;
+        width: 500px;
+        height: 70px;
+        left: 0px;
+        top: 50%;
+        margin-top: -35px;
+    }
+    .card-target{
+        position: relative;
+        display: inline-flex;
+        margin: 0px 25px;
+        width: 90px;
+        height: 70px;
+        left:0px;
+        background: white;
+        align-items: center;
+        text-align: center;
+        border-radius: 5px;
+    }
+    .search-button{
+        position: absolute;
+        display: inline-flex;
+        width: 90px;
+        height: 40px;
+        left: 475px;
+        top: 40px;
+        background: #78CAD4;
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+        border-radius: 5px;
+        border: 0px solid black;
+        text-align: center;
+        align-items: center;
+    }
+
+    .card-text{
+        position: absolute;
+        display:block;
+        width: 90px;
+        height: 24px;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 16px;
+        bottom:10px;
+        padding:0px;
+    }
+    .img-wrapper{
+        width:90px;
+        height:50px;
+        top: 10px;
+        position: absolute;
+        display: block;
+    }
+}
+
+@media only screen and (max-width:600px){
+    .menu-container{
+        position: relative;
+        margin: auto;
+        width: 400px;
+        height: 350px;
+        top: 0px;
+        background: #FFFFFF;
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+    }
+    .mo-menu-container{
+        position: relative;
+        margin: auto;
+        width: 100vw;
+        height: 120px;
+        background: #FFFFFF;
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+    }
+
+    .mo-card-container{
+        position: relative;
+        width: 100vw;
+        height: 70px;
+        left: 0px;
+        top: 50%;
+        margin-top: -35px;
+    }
+    .mo-card-target{
+        position: relative;
+        display: inline-flex;
+        margin: 0px 5px;
+        width: 90px;
+        height: 70px;
+        left:0px;
+        background: white;
+        align-items: center;
+        text-align: center;
+        border-radius: 5px;
+    }
+    .mo-card-text{
+        position: absolute;
+        display:block;
+        width: 90px;
+        height: 24px;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 16px;
+        bottom:10px;
+        padding:0px;
+    }
+    .mo-img-wrapper{
+        width:43px;
+        height:30px;
+        position: absolute;
+        left: 50%;
+        margin-left:-21.5px;
+        display: block;
+        align-items: center;
+        top: 5px;
+    }
+    .mo-search-button{
+        position: absolute;
+        left:50%;
+        margin-left:-75px;
+        width: 150px;
+        height: 40px;
+        top: 145px;
+        background: #78CAD4;
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+        border-radius: 5px;
+        border: 0px;
+        text-align: center;
+        align-items: center;
+        color: white;
+        line-height:10px;
+    }
+   
+    
+    .card-target{
+        width: 300px;
+        height: 70px;
+        margin: 15px 0px;
+        left:50px;
+        top: 50px;
+        display:block;
+    }
+    .img-wrapper{
+        position:absolute;
+        width:40px;
+        height:40px;
+        left:50px;
+        top:50%;
+        transform: scale(2)
+    }
+    .card-text{
+        position: absolute;
+        right:0px;
+        text-align: left;
+        width:150px;
+        height: 50px;
+        top: 50%;
+        margin-top: -25px;
+    }
+
+    .search-button{
+        position: absolute;
+        left:50%;
+        margin-left:-75px;
+        top:325px;
+    }
+    
 }

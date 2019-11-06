@@ -2,9 +2,8 @@ import React, { useState, useContext, useEffect, Fragment } from 'react'
 import { useSpring, animated } from 'react-spring'
 import './Menu.css'
 import Global from './Global'
-import MobileCardTarget from './MobileCardTarget'
 
-function Card(props) { // CHILD
+export default function MobileCardTarget(props) { // CHILD
     const [current, setCurrent, date, setDate, duration, setDuration, special, setSpecial, search, setSearch] = useContext(Global)
     const [hov, setHov] = useState(false)
     const mobile = window.innerWidth < 601
@@ -73,78 +72,13 @@ function Card(props) { // CHILD
     </animated.svg>
     return (
         <Fragment>
-            <animated.div style={cardStyle} className={props.mo ? 'mo-card-target' : 'card-target'}
+            <animated.div style={cardStyle} className='mo-card-target'
                 onClick={() => (setCurrent(props.name), setSearch(false))}
                 onMouseOver={() => setHov(true)}
                 onMouseLeave={() => setHov(!hov)}>
-                <div className={props.mo ? 'mo-card-text' : 'card-text'}> {props.text}</div>
-                <div className={props.mo ? 'mo-img-wrapper' : 'img-wrapper'}>{checkImg()}</div>
+                <div className='mo-card-text'> {props.text}</div>
+                <div className='mo-img-wrapper'>{checkImg()}</div>
             </animated.div>
         </Fragment>
     )
-}
-
-
-
-export default function Menu() { // PARENT
-    const [current, setCurrent, date, setDate, duration, setDuration, special, setSpecial, search, setSearch] = useContext(Global)
-    const containerStyle = useSpring({ // menu elevator - currently using margin to move up/down. Could switch to transform when you know dimensions.
-        // transform: search ? "translateY(-300px)" : 'translateY(0px)',
-        top: search ? "0%" : "50%",
-        marginTop: search ? "0px" : window.innerWidth < 601 ? "-175px" : "-60px",
-    })
-    const mobile = window.innerWidth < 601
-    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    function SearchButton(props) { // CHILD
-        const [hov, setHov] = useState(false)
-        const config = {
-            friction: 20,
-            mass: .5,
-            tension: 400
-        }
-        const searchStyle = useSpring({
-            transform: hov ? 'translateY(-2px)' : 'translateY(0px)',
-            boxShadow: hov ? "0px 3px 6px rgba(189, 189, 189, 0.75)" : "0px 2px 4px rgba(189, 189, 189, 0.5)",
-            config: config
-        })
-        return <animated.div style={searchStyle} className={props.mo ? 'mo-search-button' : 'search-button'}
-            onClick={() => setSearch(true)}
-            onMouseOver={() => setHov(true)}
-            onMouseLeave={() => setHov(false)}
-        ><p>Search</p></animated.div>
-    }
-
-
-    return (
-        <Fragment>
-            {/* {mobile && search // when the menu changes to search mode render new 'copy component' 
-                ?
-                <animated.div style={containerStyle} className='mo-menu-container'>
-                    <div className='mo-card-container'>
-                        <MobileCardTarget text={date ? [months[date.getMonth()] + " " + date.getDate() + ", " + (date.getYear() + 1900)] : "Select Date"} name={"date"} /> ,
-                        <MobileCardTarget text={duration ? duration : "Select Duration"} name={"duration"} /> ,
-                        <MobileCardTarget text={special ? special : "Select Speciality"} name={"special"} />
-                    </div>
-                    <SearchButton mo={true} />
-                </animated.div>
-                : */}
-            <animated.div style={containerStyle} className={mobile && search ? 'mo-menu-container' : 'menu-container'}>
-                {window.innerWidth > 1000 && <div className='card-names-container'>
-                    <div className='card-name'>Date</div>
-                    <div className='card-name'>Duration</div>
-                    <div className='card-name'>Specialities</div>
-                </div>}
-                <div className={mobile && search ? 'mo-card-container' : 'card-container'}>
-                    <Card mo={mobile & search ? true : false} text={date ? [months[date.getMonth()] + " " + date.getDate() + ", " + (date.getYear() + 1900)] : "Select Date"} name={"date"} />
-                    <Card mo={mobile & search ? true : false} text={duration ? duration : "Select Duration"} name={"duration"} />
-                    <Card mo={mobile & search ? true : false} text={special ? special : "Select Speciality"} name={"special"} />
-                </div>
-                <SearchButton mo={mobile && search ? true : false} />
-            </animated.div>
-
-
-
-        </Fragment>
-    )
-
 }
