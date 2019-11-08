@@ -1,19 +1,12 @@
-import React, { Component, useEffect, useRef, useState, useContext, Fragment } from 'react'
-import { TweenMax, Expo, SlowMo } from 'gsap'
+import React, { Component, Fragment } from 'react'
 import Calendar from 'react-calendar'
-import Global from './Global'
-
+import Global from '../Global'
+import './Date.css'
 export default class MyApp extends Component {
     state = {
         date: new Date(),
     }
     static contextType = Global
-
-    componentDidMount() {
-        const user = this.context
-
-        console.log(user) // { name: 'Tania', loggedIn: true }
-    }
     onChange = date => this.setState({ date })
     render() {
         return (

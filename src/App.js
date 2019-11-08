@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { TweenMax, Back, Elastic, Bounce, Expo } from 'gsap';
-import Menu from './Menu';
+import { TweenMax } from 'gsap';
+import Menu from './menu/Menu';
 import Global from './Global'
-import Date from './Date'
-import Duration from './Duration';
-import Special from './Special';
+import Date from './date/Date'
+import Duration from './duration/Duration';
+import Special from './special/Special';
 import stockPic from './images/stock-pic.jpeg'
 import './App.css';
-import Results from './Results';
+import Results from './results/Results';
 
 function App() {
   const [currentlyViewedItem, setCurrentlyViewedItem] = useState("")
@@ -15,13 +15,13 @@ function App() {
   const [duration, setDuration] = useState("")
   const [special, setSpecial] = useState("")
   const [search, setSearch] = useState("")
-  const [windowSize, setWindow] = useState("")
+  const [windowSize, setWindow] = useState(window.innerWidth)
 
   function updateWindowDimensions() {
     setWindow(window.innerWidth)
   }
 
-  useEffect(() => {
+  useEffect(() => { // refresh windowSize
     window.addEventListener('resize', updateWindowDimensions);
     return function cleanup() {
       window.removeEventListener('resize', updateWindowDimensions);

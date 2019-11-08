@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, Fragment } from 'react'
-import Global from './Global'
+import Global from '../Global'
 import "./Special.css"
 import { useSpring, animated } from 'react-spring';
 import { TweenMax } from 'gsap';
@@ -19,11 +19,10 @@ function SpecialCard(props) {
         config: config
     })
     const specialArrow = <svg width="9" height="12" viewBox="0 0 9 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M1 1L7 6L1 11" stroke="#78CAD4" stroke-width="2" />
+        <path d="M1 1L7 6L1 11" stroke="#78CAD4" strokeWidth="2" />
     </svg>
 
-    // STAGGER OUT ANIMATION
-    useEffect(() => {
+    useEffect(() => { // STAGGER OUT
         clicked ?
             TweenMax.staggerTo(".special-card-container", .22, {
                 x: 50,
@@ -47,41 +46,35 @@ function SpecialCard(props) {
         <div className='special-card-container'
             onMouseOver={() => setHov(true)}
             onMouseLeave={() => setHov(false)}
-            onClick={() => (setClicked(true), setSpecial(props.name))}
-        >
-            <animated.div style={specialCardStyle} className='special-card' id='spec'
-            >{props.name}<span className='special-arrow'>{specialArrow}</span>
+            onClick={() => (setClicked(true), setSpecial(props.name))}>
+            <animated.div style={specialCardStyle} className='special-card' id='spec'>
+                {props.name}<span className='special-arrow'>{specialArrow}</span>
             </animated.div>
         </div>
     )
 }
 
-
 export default function Special() {
     const [a, setCurrent] = useContext(Global)
-    const myList = [
+    const myList = [ // ADD PROPS HERE
         {
             time: "Head",
             cost: 60,
         },
         {
-            time: "Feeasdadt",
+            time: "Shoulder",
             cost: 70,
         },
         {
-            time: "Head",
-            cost: 60,
-        },
-        {
-            time: "Feeasdadt",
+            time: "Arm",
             cost: 70,
         },
         {
-            time: "Head",
+            time: "Back",
             cost: 60,
         },
         {
-            time: "Feeasdadt",
+            time: "Leg",
             cost: 70,
         },
 
@@ -89,17 +82,17 @@ export default function Special() {
     return (
         <Fragment>
             <div className='popup-container'
-                onClick={() => setCurrent(null)}
-            >
+                onClick={() => setCurrent(null)}>
             </div>
             <div className='popup-wrapper'>
                 {myList.map((i, key) =>
                     <SpecialCard id={key} name={i.time} />)}
-                <button style={{ position: 'relative', display: 'block', top: '30px', zIndex: 99999, margin: 'auto', }} className="close-button" onClick={() => setCurrent(null)}>Close</button>
-
+                <button style={{ position: 'relative', display: 'block', top: '25px', margin: 'auto', }}
+                    className="close-button"
+                    onClick={() => setCurrent(null)}>
+                    Close
+                </button>
             </div>
-
         </Fragment>
-
     )
 }

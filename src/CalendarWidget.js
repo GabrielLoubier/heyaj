@@ -1,8 +1,5 @@
-
 import React, { Component } from 'react'
 import TimekitBooking from 'timekit-booking'
-import $ from 'jquery'
-
 
 export default class TestApp extends Component {
     componentDidMount() {
@@ -18,7 +15,7 @@ export default class TestApp extends Component {
     render() {
         return (
             <div>
-                <h2>Widget:</h2>
+
                 <div id="bookingjs"></div>
             </div>
         )

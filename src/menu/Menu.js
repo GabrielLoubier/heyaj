@@ -1,25 +1,21 @@
 import React, { useState, useContext, useEffect, Fragment } from 'react'
 import { useSpring, animated } from 'react-spring'
 import './Menu.css'
-import Global from './Global'
+import Global from '../Global'
 
-// Copy of Card component just change className
-
-export default function MobileCardTarget(props) { // CHILD
-    const [current, setCurrent, date, setDate, duration, setDuration, special, setSpecial, search, setSearch] = useContext(Global)
+function Card(props) { // CHILD
+    const [current, setCurrent, date, setDate, duration, setDuration, special, setSpecial, search, setSearch, windowSize] = useContext(Global)
     const [hov, setHov] = useState(false)
-    const mobile = window.innerWidth < 601
-    const config = { // spring settings
+    const config = {
         friction: 20,
         mass: .5,
         tension: 400
     }
-    const cardStyle = useSpring({ // check if its hovered, has its popup activated, or is not empty
+    const cardStyle = useSpring({ // check if its hovered, has its popup activated, or is not empty 
         color: hov || current === props.name || (props.name === "date" && date) || (props.name === "duration" && duration) || (props.name === "special" && special) ? "#78CAD4" : "#BDBDBD",
         fill: hov || current === props.name || (props.name === "date" && date) || (props.name === "duration" && duration) || (props.name === "special" && special) ? "#78CAD4" : "#BDBDBD",
         transform: hov ? 'translateY(-2px)' : 'translateY(0px)',
         boxShadow: hov ? "0px 3px 6px rgba(189, 189, 189, 0.75)" : "0px 2px 4px rgba(189, 189, 189, 0.5)",
-
         config: config
     })
     function checkImg() {
@@ -29,7 +25,7 @@ export default function MobileCardTarget(props) { // CHILD
             return timerSVG
         else return specialSVG
     }
-    const calendarSVG = <animated.svg style={{ ...cardStyle, boxShadow: "0px", }} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    const calendarSVG = <animated.svg style={{ ...cardStyle, boxShadow: "0px", }} width="20" height="20" viewBox="0 0 20 20" fill="none" >
         <path d="M16.75 3.66667C16.229 3.38733 12.9893 1.64333 11.209 0.526333C10.905 0.204 10.477 0 10 0C9.523 0 9.095 0.204 8.791 0.526333C7.01033 1.643 3.771 3.38733 3.25 3.66667H0V20H20V3.66667H16.75ZM10.741 1.00133C10.7423 1.003 10.7427 1.005 10.7443 1.00667C10.8253 1.09767 10.9147 1.23533 10.9633 1.412C10.9673 1.427 10.974 1.441 10.9773 1.45667C10.9913 1.52133 11 1.59133 11 1.66667C11 2.218 10.5513 2.66667 10 2.66667C9.44867 2.66667 9 2.218 9 1.66667C9 1.59133 9.00867 1.52133 9.023 1.45667C9.02633 1.44133 9.03267 1.42767 9.03667 1.41267C9.08533 1.23533 9.17467 1.098 9.25567 1.00667C9.257 1.005 9.25733 1.003 9.259 1.00133C9.44233 0.797667 9.705 0.666667 10 0.666667C10.295 0.666667 10.5577 0.797667 10.741 1.00133ZM8.33533 1.58467C8.334 1.612 8.33333 1.63933 8.33333 1.66667C8.33333 2.58567 9.081 3.33333 10 3.33333C10.919 3.33333 11.6667 2.58567 11.6667 1.66667C11.6667 1.63933 11.666 1.612 11.6647 1.58467C12.8623 2.29667 14.343 3.117 15.3503 3.66667H4.64967C5.657 3.117 7.13767 2.29667 8.33533 1.58467ZM3.33333 4.33333H16.6667H19.3333V6H0.666667V4.33333H3.33333ZM0.666667 19.3333V6.66667H19.3333V19.3333H0.666667Z" />
         <path d="M7.66683 9.66667C7.85092 9.66667 8.00016 9.51743 8.00016 9.33333C8.00016 9.14924 7.85092 9 7.66683 9C7.48273 9 7.3335 9.14924 7.3335 9.33333C7.3335 9.51743 7.48273 9.66667 7.66683 9.66667Z" />
         <path d="M9.99984 9.66667C10.1839 9.66667 10.3332 9.51743 10.3332 9.33333C10.3332 9.14924 10.1839 9 9.99984 9C9.81574 9 9.6665 9.14924 9.6665 9.33333C9.6665 9.51743 9.81574 9.66667 9.99984 9.66667Z" />
@@ -56,11 +52,11 @@ export default function MobileCardTarget(props) { // CHILD
         <path d="M9.99984 17.3333C10.1839 17.3333 10.3332 17.1841 10.3332 17C10.3332 16.8159 10.1839 16.6667 9.99984 16.6667C9.81574 16.6667 9.6665 16.8159 9.6665 17C9.6665 17.1841 9.81574 17.3333 9.99984 17.3333Z" />
         <path d="M12.3333 17.3333C12.5174 17.3333 12.6667 17.1841 12.6667 17C12.6667 16.8159 12.5174 16.6667 12.3333 16.6667C12.1492 16.6667 12 16.8159 12 17C12 17.1841 12.1492 17.3333 12.3333 17.3333Z" />
     </animated.svg>
-    const timerSVG = <animated.svg style={{ ...cardStyle, boxShadow: "0px" }} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    const timerSVG = <animated.svg style={{ ...cardStyle, boxShadow: "0px" }} width="20" height="20" viewBox="0 0 20 20" fill="none" >
         <path d="M10 0C9.81567 0 9.66667 0.149 9.66667 0.333333V4.764C9.66667 4.94833 9.81567 5.09733 10 5.09733C10.1843 5.09733 10.3333 4.94833 10.3333 4.764V0.672667C15.3263 0.848667 19.3333 4.96533 19.3333 10C19.3333 15.1463 15.1463 19.3333 10 19.3333C4.85367 19.3333 0.666667 15.1463 0.666667 10C0.666667 7.51333 1.63333 5.17367 3.38867 3.412C3.519 3.28133 3.51833 3.07067 3.388 2.94067C3.25733 2.81133 3.04667 2.81133 2.91667 2.94133C1.03567 4.82867 0 7.33567 0 10C0 15.514 4.486 20 10 20C15.514 20 20 15.514 20 10C20 4.486 15.514 0 10 0Z" />
         <path d="M9.5186 11.1774C9.72327 11.4591 10.0396 11.6361 10.3866 11.6631C10.4176 11.6657 10.4486 11.6667 10.4793 11.6667C10.7933 11.6667 11.0953 11.5427 11.3189 11.3187C11.5646 11.0731 11.6903 10.7334 11.6633 10.3864C11.6363 10.0394 11.4593 9.72306 11.1769 9.51773L6.86227 6.39673C6.73027 6.3014 6.54727 6.31607 6.43127 6.4314C6.31527 6.5474 6.30093 6.73007 6.3966 6.8624L9.5186 11.1774ZM10.7853 10.0574C10.9089 10.1474 10.9866 10.2864 10.9986 10.4387C11.0106 10.5907 10.9553 10.7397 10.8476 10.8477C10.7396 10.9554 10.5879 11.0104 10.4383 10.9987C10.2863 10.9871 10.1473 10.9091 10.0579 10.7864L8.1536 8.15406L10.7853 10.0574Z" />
     </animated.svg>
-    const specialSVG = <animated.svg style={{ ...cardStyle, boxShadow: "0px" }} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    const specialSVG = <animated.svg style={{ ...cardStyle, boxShadow: "0px" }} width="20" height="20" viewBox="0 0 20 20" fill="none" >
         <path d="M14.069 0.805008C13.8806 0.805008 13.6865 0.829383 13.4928 0.877195L13.6419 1.48376C14.8234 1.19376 15.8537 2.09282 15.8537 3.21501C15.8537 5.84345 12.8606 7.78063 11.6128 8.14532L11.7881 8.74532C13.3731 8.28188 16.479 6.11782 16.4794 3.21501C16.4794 1.88595 15.3981 0.805008 14.069 0.805008Z" />
         <path d="M0.624688 3.21498C0.624688 2.09279 1.65469 1.19248 2.83656 1.48404L2.98625 0.877167C1.4225 0.492792 0 1.69779 0 3.21498C0 6.1181 3.10625 8.28217 4.69062 8.74529L4.86594 8.14529C3.61781 7.78029 0.624688 5.84342 0.624688 3.21498Z" />
         <path d="M9.32326 11.6328H7.15576C6.98326 11.6328 6.84326 11.7725 6.84326 11.9453V13.1312C6.84326 13.2253 6.88607 13.315 6.95951 13.3744C7.01545 13.4197 7.08482 13.4437 7.15576 13.4437C7.17764 13.4437 7.19982 13.4412 7.2217 13.4366C7.86545 13.2975 8.61389 13.2975 9.25732 13.4366C9.34982 13.4559 9.44607 13.4334 9.51951 13.3744C9.59295 13.315 9.63576 13.2259 9.63576 13.1312V11.9453C9.63576 11.7725 9.49607 11.6328 9.32326 11.6328ZM9.01076 12.7587C8.51014 12.6897 7.96889 12.6894 7.46826 12.7591V12.2578V12.2575H9.01076V12.7587Z" />
@@ -74,13 +70,71 @@ export default function MobileCardTarget(props) { // CHILD
     </animated.svg>
     return (
         <Fragment>
-            <animated.div style={cardStyle} className='mo-card-target'
+            <animated.div style={cardStyle} className={props.mo ? 'mo-card-target' : 'card-target'}
                 onClick={() => (setCurrent(props.name), setSearch(false))}
                 onMouseOver={() => setHov(true)}
                 onMouseLeave={() => setHov(!hov)}>
-                <div className='mo-card-text'> {props.text}</div>
-                <div className='mo-img-wrapper'>{checkImg()}</div>
+                <div className={props.mo ? 'mo-card-text' : 'card-text'}> {props.text}</div>
+                <div className={props.mo ? 'mo-img-wrapper' : 'img-wrapper'}>{checkImg()}</div>
             </animated.div>
         </Fragment>
     )
+}
+
+
+
+export default function Menu() { // PARENT
+    const [current, setCurrent, date, setDate, duration, setDuration, special, setSpecial, search, setSearch, windowSize] = useContext(Global)
+    const containerStyle = useSpring({ // menu elevator - currently using margin to move up/down. Could switch to translate if animation is blocky.
+        // transform: search ? "translateY(-300px)" : 'translateY(0px)',
+        top: search ? "0%" : "50%",
+        marginTop: search ? "0px" : windowSize < 601 ? "-175px" : "-60px",
+    })
+    const mobile = window.innerWidth < 601
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    function SearchButton(props) { // CHILD
+        const [hov, setHov] = useState(false)
+        const config = {
+            friction: 20,
+            mass: .5,
+            tension: 400
+        }
+        const searchStyle = useSpring({
+            transform: hov ? 'translateY(-2px)' : 'translateY(0px)',
+            boxShadow: hov ? "0px 3px 6px rgba(189, 189, 189, 0.75)" : "0px 2px 4px rgba(189, 189, 189, 0.5)",
+            config: config
+        })
+        return <animated.div style={searchStyle} className={props.mo ? 'mo-search-button' : 'search-button'}
+            onClick={() => setSearch(true)}
+            onMouseOver={() => setHov(true)}
+            onMouseLeave={() => setHov(false)}>
+            <p>Search</p>
+        </animated.div>
+    }
+
+    const [mobileSearch, setMobileSearch] = useState(false)
+    useEffect(() => {
+        if (mobile && search)
+            setMobileSearch(true)
+        else setMobileSearch(false)
+    }, [mobile, search, setMobileSearch])
+
+    return (
+        <Fragment>
+            <animated.div style={containerStyle} className={mobileSearch ? 'mo-menu-container' : 'menu-container'}>
+                {windowSize > 1000 && <div className='card-names-container'>
+                    <div className='card-name'>Date</div>
+                    <div className='card-name'>Duration</div>
+                    <div className='card-name'>Specialities</div>
+                </div>}
+                <div className={mobileSearch ? 'mo-card-container' : 'card-container'}>
+                    <Card mo={mobileSearch} text={date ? [months[date.getMonth()] + " " + date.getDate() + ", " + (date.getYear() + 1900)] : "Select Date"} name={"date"} />
+                    <Card mo={mobileSearch} text={duration ? duration : "Select Duration"} name={"duration"} />
+                    <Card mo={mobileSearch} text={special ? special : "Select Speciality"} name={"special"} />
+                </div>
+                <SearchButton mo={mobileSearch} />
+            </animated.div>
+        </Fragment>
+    )
+
 }
