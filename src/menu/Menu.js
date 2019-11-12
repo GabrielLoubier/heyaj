@@ -84,7 +84,7 @@ function Card(props) { // CHILD
 
 
 export default function Menu() { // PARENT
-    const [current, setCurrent, date, setDate, duration, setDuration, special, setSpecial, search, setSearch, windowSize] = useContext(Global)
+    const [current, setCurrent, date, setDate, duration, setDuration, special, setSpecial, search, setSearch, windowSize, firstSearch, setFirstSearch] = useContext(Global)
     const containerStyle = useSpring({ // menu elevator - currently using margin to move up/down. Could switch to translate if animation is blocky.
         // transform: search ? "translateY(-300px)" : 'translateY(0px)',
         top: search ? "0%" : "50%",
@@ -92,6 +92,7 @@ export default function Menu() { // PARENT
     })
     const mobile = window.innerWidth < 601
     var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
     function SearchButton(props) { // CHILD
         const [hov, setHov] = useState(false)
         const config = {
@@ -104,8 +105,9 @@ export default function Menu() { // PARENT
             boxShadow: hov ? "0px 3px 6px rgba(189, 189, 189, 0.75)" : "0px 2px 4px rgba(189, 189, 189, 0.5)",
             config: config
         })
+
         return <animated.div style={searchStyle} className={props.mo ? 'mo-search-button' : 'search-button'}
-            onClick={() => setSearch(true)}
+            onClick={() => (setSearch(true), firstSearch && setFirstSearch(false))}
             onMouseOver={() => setHov(true)}
             onMouseLeave={() => setHov(false)}>
             <p>Search</p>

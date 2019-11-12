@@ -10,12 +10,13 @@ import './App.css';
 import Results from './results/Results';
 
 function App() {
-  const [currentlyViewedItem, setCurrentlyViewedItem] = useState("")
-  const [date, setDate] = useState("")
-  const [duration, setDuration] = useState("")
-  const [special, setSpecial] = useState("")
-  const [search, setSearch] = useState("")
+  const [currentlyViewedItem, setCurrentlyViewedItem] = useState("") // date || duration || special
+  const [date, setDate] = useState(null)
+  const [duration, setDuration] = useState(null)
+  const [special, setSpecial] = useState(null)
+  const [search, setSearch] = useState(false)
   const [windowSize, setWindow] = useState(window.innerWidth)
+  const [firstSearch, setFirstSearch] = useState(true) // if false, no need to press search - auto show widget
 
   function updateWindowDimensions() {
     setWindow(window.innerWidth)
@@ -29,9 +30,9 @@ function App() {
   }, []);
 
   useEffect(() => { // show results page if three choices are selected
-    const timer = setTimeout(() => { date && duration && special && setSearch(true) }, 700)
+    const timer = setTimeout(() => { date && duration && special && !firstSearch && setSearch(true) }, 700)
     return () => clearTimeout(timer)
-  }, [date, duration, special, setSearch])
+  }, [date, duration, special, setSearch, firstSearch])
 
   useEffect(() => {  // modal popup fade in
     TweenMax.to(".popup-wrapper", .2, { y: -50 })
@@ -49,7 +50,20 @@ function App() {
   }
 
   return (
-    <Global.Provider value={[currentlyViewedItem, setCurrentlyViewedItem, date, setDate, duration, setDuration, special, setSpecial, search, setSearch, windowSize]}>
+    <Global.Provider value={[
+      currentlyViewedItem,
+      setCurrentlyViewedItem,
+      date,
+      setDate,
+      duration,
+      setDuration,
+      special,
+      setSpecial,
+      search,
+      setSearch,
+      windowSize,
+      firstSearch,
+      setFirstSearch]}>
       <div className="parent-container" style={{ backgroundImage: `url(${stockPic})`, backgroundSize: 'cover' }}>
         <Menu />
         {renderPopUp()}
